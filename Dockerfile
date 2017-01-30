@@ -44,6 +44,8 @@ RUN chmod +x /usr/local/bin/start_super.sh
 
 # replace the fpm socket with tcp connection
 RUN sed -i 's|listen = /run/php/php7.0-fpm.sock|listen = 127.0.0.1:9000|' /etc/php/7.0/fpm/pool.d/www.conf
+# enable env variable reference to fpm
+RUN sed -i 's|;clear_env = no|clear_env = no|' /etc/php/7.0/fpm/pool.d/www.conf
 
 # Define our command to be run when launching the container
 CMD ["/usr/local/bin/start_super.sh"]
